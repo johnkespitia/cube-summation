@@ -71,7 +71,7 @@ function showTestCase() {
     if (contadorT <= jQuery('#t').val()) {
         jQuery('#logger').html(jQuery('#logger').html() + "\n<div id='Caso_" + contadorT + "'></div>");
         jQuery('#Caso_' + contadorT).load('index.php?view=test-form&tryNo=' + contadorT, function (e) {
-
+            
         });
     }
 
@@ -115,20 +115,20 @@ function operate() {
             z: jQuery('#uz').val(),
             w: jQuery('#uw').val()
         }, function (e) {
-            jQuery('#Caso_' + contadorT).html(txtt + "<br/>" + e.return);
+            txtt += "<br/>" + e.return;
+            jQuery.post('index.php?view=query', {
+                x1: jQuery('#x1').val(),
+                y1: jQuery('#y1').val(),
+                z1: jQuery('#z1').val(),
+                x2: jQuery('#x2').val(),
+                y2: jQuery('#y2').val(),
+                z2: jQuery('#z2').val()
+            }, function (e) {
+                jQuery('#Caso_' + contadorT).html(txtt+'<br/>'+e.return);
+                contadorT++;
+                showTestCase();
+            });
         });
-        jQuery.post('index.php?view=query', {
-            x1: jQuery('#x1').val(),
-            y1: jQuery('#y1').val(),
-            z1: jQuery('#z1').val(),
-            x2: jQuery('#x2').val(),
-            y2: jQuery('#y2').val(),
-            z2: jQuery('#z2').val()
-        }, function (e) {
-            console.log(e.return);
-            jQuery('#Caso_' + contadorT).html(txtt + "<br/>" + e.return);
-        });
-        txtt = jQuery('#Caso_' + contadorT).html('');
     } else {
         alert('Complete los datos');
     }
