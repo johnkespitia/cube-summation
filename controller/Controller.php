@@ -13,8 +13,15 @@ class Controller {
         $this->_cubo = new Cube($n);
     }
 
+    public function setNCube($n) {
+        $this->_cubo->setNCube($n);
+    }
+
     public function update($x, $y, $z, $w) {
         return $this->_cubo->update($x, $y, $z, $w);
+    }
+    public function delete() {
+        return $this->_cubo->deleteCube();
     }
 
     public function query($x1, $y1, $z1, $x2, $y2, $z2) {
@@ -24,7 +31,10 @@ class Controller {
 
     public function getCube() {
         return $this->_cubo->getCube();
-        ;
+    }
+    
+    public function setCube($cube) {
+        return $this->_cubo=$cube;
     }
 
 }
